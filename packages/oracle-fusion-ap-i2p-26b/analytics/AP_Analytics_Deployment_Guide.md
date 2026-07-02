@@ -20,7 +20,7 @@ This analytics capability measures AP workload, throughput, and exceptions using
 
 ### Step 1: Review Governance Charter
 
-Reference: [`01-invoice-to-pay-governance-package.md`](../01-invoice-to-pay-governance-package.md)
+Reference: [`02-governed-data-and-analytics.md`](../02-governed-data-and-analytics.md)
 
 Confirm:
 - [ ] Analytics charter is signed

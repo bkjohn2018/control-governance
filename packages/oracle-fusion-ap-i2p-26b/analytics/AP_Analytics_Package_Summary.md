@@ -19,7 +19,7 @@ This is the complete, production-ready package for AP workload and throughput an
 | Finance Documentation Lifecycle | Define the 6-stage documentation process | External skill / finance documentation lifecycle standard |
 | AP Analytics Governance Checklist | Validation points before deployment | `analytics/AP_Analytics_Governance_Checklist.md` |
 | AP Analytics Deployment Guide | Step-by-step implementation | `analytics/AP_Analytics_Deployment_Guide.md` |
-| AP Invoice to Pay Governance Package | AP I2P governance charter | `../01-invoice-to-pay-governance-package.md` |
+| AP Governed Data and Analytics | AP analytics governance baseline | `../02-governed-data-and-analytics.md` |
 
 ---
 

@@ -1,0 +1,12 @@
+{
+  "name": "control-governance-presentations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deck build utilities for control-governance presentations",
+  "scripts": {
+    "build:capex-mdm": "node build-capex-mdm-deck.mjs"
+  },
+  "devDependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}

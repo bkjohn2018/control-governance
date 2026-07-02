@@ -30,7 +30,7 @@ This is a complete, governance-ready analytics capability for measuring AP workl
 - Pre-deployment validation checklist
 
 ### 2. For Finance / AP Leadership
-👉 **Governance charter:** [01-invoice-to-pay-governance-package.md](../01-invoice-to-pay-governance-package.md)
+👉 **Governed data and analytics baseline:** [02-governed-data-and-analytics.md](../02-governed-data-and-analytics.md)
 
 ### 3. For BI/Analytics Implementation Team
 👉 **Then:** [AP_Analytics_Deployment_Guide.md](./AP_Analytics_Deployment_Guide.md)

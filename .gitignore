@@ -13,3 +13,6 @@ desktop.ini
 # Temp
 *.tmp
 *.bak
+
+# Node (presentation build)
+presentations/node_modules/

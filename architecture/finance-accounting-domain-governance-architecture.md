@@ -4,7 +4,7 @@
 
 This guide defines a reusable governance architecture for Finance & Accounting (F&A) domains. It establishes how domain operations, analytics, AI augmentation, and bounded agents fit together without confusing process ownership, data trust, control evidence, and automation authority.
 
-AP Invoice-to-Pay is the first worked example because it is control-heavy, evidence-rich, exception-prone, and data-sensitive. The architecture is domain-agnostic and can be applied to AR, GL, Close, FP&A, Payroll, Tax, Treasury, Fixed Assets, Procurement Finance, Revenue, and Audit Support.
+AP Invoice-to-Pay is the first worked example because it is control-heavy, evidence-rich, exception-prone, and data-sensitive. Receivables Credit to Cash, Procurement, General Ledger, Projects, Fixed Assets, and Oracle Cloud EPM Financial Consolidation and Close are now also represented as domain bundles in this repository. The architecture is domain-agnostic and can be applied to AR, GL, Record to Report / Close, FP&A, Payroll, Tax, Treasury, Fixed Assets, Procurement, Revenue, and Audit Support.
 
 ## Core Principle
 
@@ -39,7 +39,7 @@ flowchart TD
 
 The F&A domain is the governed business context. It defines the business function, process scope, accountable leadership, risk profile, regulatory exposure, and management decisions supported.
 
-Examples include AP, AR, GL, Close, FP&A, Payroll, Tax, Treasury, Fixed Assets, Procurement Finance, Revenue, and Audit Support.
+Examples include AP, AR, GL, Record to Report / Close, FP&A, Payroll, Tax, Treasury, Fixed Assets, Procurement, Revenue, and Audit Support.
 
 Each domain must identify:
 - Business purpose and process scope.
@@ -70,7 +70,7 @@ Required components:
 - Evidence artifacts, retention, and review cadence.
 - Operating metrics and governance review rhythm.
 
-For AP, this layer is represented by [`01-invoice-to-pay-governance-package.md`](../packages/oracle-fusion-ap-i2p-26b/01-invoice-to-pay-governance-package.md).
+For AP, this layer is represented by [`01-controlled-operations.md`](../packages/oracle-fusion-ap-i2p-26b/01-controlled-operations.md).
 
 ## Layer 3: Analytics Architecture
 
@@ -93,7 +93,7 @@ Required components:
 - Analytics extension intake and approval path.
 - Change control for reports, metrics, models, extracts, and dashboards.
 
-For AP, this layer is represented by [`analytics-intake-and-extension-policy.md`](../policies/analytics-intake-and-extension-policy.md) and the AP native Oracle reporting assessment.
+For AP, this layer is represented by [`02-governed-data-and-analytics.md`](../packages/oracle-fusion-ap-i2p-26b/02-governed-data-and-analytics.md) and [`analytics-intake-and-extension-policy.md`](../policies/analytics-intake-and-extension-policy.md).
 
 ## Layer 4: AI Augmentation Governance
 
@@ -118,7 +118,7 @@ Required components:
 
 AI should not be used to compensate for undefined operations, weak analytics lineage, unclear metrics, missing control evidence, or unresolved data ownership. In those cases, process and analytics architecture must be strengthened first.
 
-For AP, this layer is represented by [`02-finance-ai-governance-bundle.md`](../packages/oracle-fusion-ap-i2p-26b/02-finance-ai-governance-bundle.md).
+For AP, this layer is represented by [`03-governed-ai.md`](../packages/oracle-fusion-ap-i2p-26b/03-governed-ai.md).
 
 ## Layer 5: Bounded Agents
 
@@ -214,7 +214,20 @@ AP is a strong proving ground because:
 - It has strong analytics dependencies: native Oracle reporting, metric definitions, lineage, data quality, and governed extensions.
 - It exposes AI risks clearly: supplier data, bank data, tax data, payment decisions, duplicate risk, approval evidence, and agentic action boundaries.
 
-The AP worked example should be used to validate the architecture, improve the templates, and prove the governance sequence before applying the model to other F&A domains.
+The AP worked example should be used to validate the architecture, improve the templates, and prove the governance sequence before applying the model to other F&A domains. The additional Receivables Credit to Cash, Procurement, General Ledger, Projects, Fixed Assets, and Financial Consolidation and Close bundles extend that proof into adjacent operational, accounting, and close domains.
+
+## Cross-Domain Lifecycle Overlays
+
+Some business processes span multiple F&A domains. Domain bundles remain authoritative for in-domain operations, analytics, and AI. Cross-domain overlays define stage gates, handoff data contracts, joint RACI, enterprise metrics, and issue routing without duplicating domain SOPs.
+
+| Overlay | Domains | Document |
+|---|---|---|
+| CapEx lifecycle (process) | Procurement, AP, Projects, Fixed Assets, GL | [`capex-lifecycle-governance-overlay.md`](capex-lifecycle-governance-overlay.md) |
+| CapEx lifecycle (master data) | Investment, Projects, Procurement, AP, FA, GL | [`capex-master-data-management-framework.md`](capex-master-data-management-framework.md) |
+
+**EPM Planning Modules** serves as upstream Pattern A for CapEx stages L1–L5 (strategy through budgeting). The [EPM Planning governance package](../packages/oracle-cloud-epm-planning-modules/) governs the planning, budgeting, and Capital module operations that produce `CapExInvestmentID`, budget versions, and Capital plan data consumed by the overlay and MDM framework.
+
+Apply overlays after domain Operations Architecture is documented for each participating domain.
 
 ## Reusable Domain Checklist
 
@@ -245,4 +258,5 @@ Use this checklist when applying the architecture to a new F&A domain:
 | Effective date | To be assigned at approval |
 | Review cadence | Annual or upon material process, analytics, AI, control, security/privacy, or regulatory change |
 | Controlled copy location | To be assigned |
-| Related worked example | AP Finance AI Governance Bundle |
+| Related worked examples | AP I2P, Receivables Credit to Cash, Procurement, General Ledger, Projects, Fixed Assets, Financial Consolidation and Close, EPM Planning Modules |
+| Related cross-domain overlays | CapEx Lifecycle Governance Overlay, CapEx Master Data Management Framework |

@@ -9,7 +9,8 @@
 - Maturity: Draft for pilot + operational use
 - Tone: Operational, control-focused, and audit-ready
 - Source prerequisites:
-  - [`01-invoice-to-pay-governance-package.md`](01-invoice-to-pay-governance-package.md)
+  - [`01-controlled-operations.md`](01-controlled-operations.md)
+  - [`02-governed-data-and-analytics.md`](02-governed-data-and-analytics.md)
   - [`analytics-intake-and-extension-policy.md`](../../policies/analytics-intake-and-extension-policy.md)
 - Framework anchors:
   - NIST AI RMF: Govern, Map, Measure, Manage

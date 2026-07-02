@@ -6,6 +6,7 @@
 >
 > Source anchor: Oracle Help Center, *Oracle Fusion Cloud Procurement 26B Documentation Library* — <https://docs.oracle.com/en/cloud/saas/procurement/26b/index.html>
 > Related Oracle content: *Using Procurement 26B* (AI capabilities sections), *What's New for Oracle Procurement 26B*, *Oracle Fusion Cloud Procurement: Implementing Procurement* (AI/Agents/Assistants setup).
+> Supplemental analytics AI surface: Oracle Analytics Cloud (OAC) AI Assistant / AI Agent when used with approved procurement analytics content.
 > Governance lenses: NIST AI RMF (Govern, Map, Measure, Manage), NIST AI RMF Playbook, NIST SP 800-53 Rev. 5, DAMA-DMBOK.
 
 ---
@@ -27,7 +28,7 @@
 
 ## 1) Executive Summary
 
-**Context.** Oracle continues to embed AI across Fusion Cloud Procurement. The 26B release expands generative AI authoring assistance, response summarization, supplier and award recommendations, contract risk analysis, classification, Digital Assistant skills, and emerging procurement AI Agents that can perform guarded multi-step actions. These features create real productivity and risk-management value, but they also introduce risks: incorrect or unsupported recommendations, sensitive data exposure, control bypass, overreliance on AI for procurement judgment, supplier impact from biased or stale signals, contract exposure from missed legal nuance, and unauthorized agent actions in supplier-facing or transactional flows.
+**Context.** Oracle continues to embed AI across Fusion Cloud Procurement. The 26B release expands generative AI authoring assistance, response summarization, supplier and award recommendations, contract risk analysis, classification, Digital Assistant skills, and emerging procurement AI Agents that can perform guarded multi-step actions. OAC also introduces analytics-layer AI capabilities such as AI Assistant and AI Agents over governed procurement analytics content. These features create real productivity and risk-management value, but they also introduce risks: incorrect or unsupported recommendations, sensitive data exposure, control bypass, overreliance on AI for procurement judgment, supplier impact from biased or stale signals, contract exposure from missed legal nuance, and unauthorized agent actions in supplier-facing or transactional flows.
 
 **What this package does.** It establishes the governance layer for Procurement 26B AI: an AI Safe Use Policy scoped to procurement (§3); a use-case intake workflow (§4) routed to a 26B AI feature inventory (§5); a risk-and-control matrix that maps each AI feature to NIST AI RMF functions and to control objectives, owners, and evidence (§6); an Agent Readiness assessment template tuned to procurement agents (§7); residual-risk and decision posture for each feature (§8); monitoring, incident, and recertification mechanics (§§9–10).
 
@@ -51,6 +52,7 @@
   - ML classifiers (spend, risk).
   - Digital Assistant interactions tied to procurement intents.
   - Procurement AI Agents that plan or take action in procurement workflows.
+- OAC AI Assistant and OAC AI Agents when they query, summarize, or operationalize approved procurement dashboards, workbooks, or semantic content.
 - Inputs and outputs of these features, including any prompts authored by users.
 
 ### 2.2 Out of scope
@@ -80,7 +82,7 @@ All employees and service accounts interacting with AI features in Procurement 2
 | Category | Description | Procurement 26B examples | Approval needed |
 |---|---|---|---|
 | **Permitted** | Assistive use that produces drafts, summaries, or suggestions reviewed by a competent human before any procurement decision, commitment, or external communication | Gen AI requisition description draft; gen AI summary of supplier negotiation responses; AI item suggestion in catalog search; Digital Assistant intent help; spend classification suggestion reviewed by Spend Analytics Steward | Standing approval per policy |
-| **Restricted** | Use that involves sensitive procurement data, materially supports a procurement judgment, or interacts with supplier-facing or transactional flows; requires named control mitigations and recorded human approval | AI award recommendation in Sourcing; AI supplier recommendation for new categories; AI contract clause suggestion / risk scoring; AI summary used in a supplier-facing communication; Procurement AI Agent that prepares a draft PO or change order | Per-use approval per §3.7; assessment per §6/§7 |
+| **Restricted** | Use that involves sensitive procurement data, materially supports a procurement judgment, or interacts with supplier-facing or transactional flows; requires named control mitigations and recorded human approval | AI award recommendation in Sourcing; AI supplier recommendation for new categories; AI contract clause suggestion / risk scoring; AI summary used in a supplier-facing communication; OAC AI Assistant over approved procurement dashboards; Procurement AI Agent that prepares a draft PO or change order | Per-use approval per §3.7; assessment per §6/§7 |
 | **Prohibited** | Use that would bypass controls, expose restricted data, take unauthorized action, or replace human accountability | Autonomous award without human approval; autonomous PO issuance, change order, or final close; autonomous contract signature or activation; sharing supplier-confidential bid data or contract pricing into a non-approved AI tool; using AI output as the sole basis for legal, tax, or compliance determinations; uploading restricted data (bank, tax ID, contract pricing, qualification scores, PII) into AI tools outside the approved Oracle environment | Not allowed |
 
 ### 3.4 Data handling rules
@@ -216,6 +218,8 @@ All employees and service accounts interacting with AI features in Procurement 2
 | AI-09 | Procurement AI Agent — draft action (e.g., draft PO from approved requisition with anomaly check) | Purchasing | Agent | Buyer (approves) | Drafted document / staged action | Action prep only; human approval gate before commit | Agentic |
 | AI-10 | Gen AI summary on supplier or PO records | Multiple | Summarizer | All | Summary text | None | Low |
 | AI-11 | AI item recommendation in catalog search | Self Service Procurement | Recommender | Requester | Suggested items | None | Low |
+| AI-12 | OAC AI Assistant on certified procurement dashboards / workbooks | OAC / FAW-PROC | Analytics AI assistant | Analytics Lead, CPO staff | Interactive insight / answer | None | Restricted |
+| AI-13 | OAC AI Agent summarizing certified procurement analytics content | OAC / FAW-PROC | Analytics AI agent | Analytics Lead | Draft insight / staged follow-up content | Action prep only; human approval gate before release | Agentic |
 
 > The actual list and behavior depend on tenant configuration and Oracle release. Add a row for every newly enabled feature; never assume a feature is "low risk" by analogy alone.
 
