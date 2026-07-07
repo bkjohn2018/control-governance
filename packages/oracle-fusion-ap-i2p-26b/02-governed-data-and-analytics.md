@@ -9,7 +9,9 @@
 > - `analytics/AP_Analytics_Package_Summary.md`
 > - `../../policies/analytics-intake-and-extension-policy.md`
 >
-> Source anchor: Oracle Help Center, *Oracle Fusion Cloud Financials 26B* - Payables reporting and inquiry capability.
+> Source anchors:
+> - Oracle Help Center, *Oracle Fusion Cloud Financials 26B* — Payables reporting and inquiry capability
+> - [Oracle Fusion Payables Predefined Reports 26C](https://docs.oracle.com/en/cloud/saas/financials/26c/fappp/oracle-fusion-payables-predefined-reports.html)
 
 ---
 
@@ -34,7 +36,7 @@
 
 **What this package does.** It defines the AP data and analytics governance layer: domain ownership, canonical AP terms, governed KPI definitions, data quality controls, metadata and lineage expectations, issue routing, and sensitive-data handling rules.
 
-**What is ready.** Canonical AP KPI definitions, a native-first reporting rule, a workload analytics use case boundary, baseline lineage for the AP workload package, and recurring DQ controls tied to operational gates.
+**What is ready.** Canonical AP KPI definitions including KPI-09 (AP Outstanding Balance by Aging Tier) as the financial truth anchor for all operational aging views; a predefined report inventory (Section 10) covering all 43 Oracle-shipped Payables reports with governance tier, KPI/control/DQ linkage, and retention flags; canonical aging definitions establishing past-due financial aging as distinct from operational stage aging; a native-first reporting rule; a workload analytics use case boundary; baseline lineage for the AP workload package; and recurring DQ controls tied to operational gates.
 
 **What remains.** Tenant-specific source mapping, dashboard certification, and automated DQ monitoring on approved datasets.
 
@@ -134,6 +136,10 @@
 | Work in Process (WIP) | Open AP invoice workload not yet fully paid or resolved | AP Process Owner | Report Steward | AP backlog | "Aging" when stage view is intended |
 | Stage Age | Number of days an invoice has remained in its current processing stage | AP Manager | Report Steward | Queue age | "Cycle time" |
 | Flow Time | End-to-end days from invoice receipt or registration to payment completion | AP Process Owner | Report Steward | Throughput time | "Stage age" |
+| Aging (AP) | Elapsed days since the due date for AP invoices not yet paid as of the reporting as-of date, grouped into approved aging bucket boundaries. Distinct from Stage Age, which measures operational processing time from stage entry | AP Process Owner | AP Manager | Payables aging; past-due payables | "Stage age" when financial aging is meant; "days outstanding" when past-due meaning is intended |
+| Past Due (AP) | An AP invoice where the due date has passed and full payment has not been executed as of the as-of date. Represents a late payment against supplier terms. Days past due = as-of date minus due date | AP Manager | AP Specialist | Overdue payable; late payment | "Outstanding" alone; "in process" |
+| Current (AP) | An AP invoice outstanding within approved payment terms; the due date has not yet been reached as of the as-of date. Current items are excluded from past-due aging buckets | AP Manager | AP Specialist | Not yet due; within terms | "Current aging" |
+| Due Date (AP) | The date by which payment must be executed to satisfy supplier payment terms, calculated as invoice date plus the payment terms on the invoice. The due date is the reference date for on-time payment measurement and AP aging calculations | AP Manager | AP Specialist | Payment due date; terms date | "Invoice date" when due date is meant |
 
 ---
 
@@ -151,7 +157,7 @@
 - **Question:** Q3
 - **Formula:** Invoices paid with a fully compliant approval trail / total invoices paid.
 - **Grain:** Payment run and monthly aggregate.
-- **Source:** Approval logs and payment records.
+- **Source:** Approval logs and payment records; Payables Payment Register; Payables Invoice Audit Listing.
 - **Owner / Steward:** AP Manager / AP Analyst.
 - **Threshold:** Green = 100%; Amber 99.0% to <100%; Red <99.0%.
 
@@ -159,9 +165,10 @@
 - **Question:** Q4
 - **Formula:** Invoices paid on or before due date / total invoices paid.
 - **Grain:** Week -> month aggregate.
-- **Source:** Due date and payment posting data.
+- **Source:** Due date and payment posting data; Payables Payment Register.
 - **Owner / Steward:** AP Manager / AP Specialist.
 - **Threshold:** Green >= 98%; Amber 95% to <98%; Red <95%.
+- **Date Reference:** Due date is the reference for "on time." Payment is on time if the payment posting date is on or before the due date. As-of date for period review must be consistent with the period-close date.
 
 ### KPI-04 - Duplicate Payment Prevention Effectiveness
 - **Question:** Q6
@@ -175,7 +182,7 @@
 - **Question:** Q5
 - **Formula:** Open invoices on hold or in exception state / total open invoices.
 - **Grain:** Daily snapshot, monthly review.
-- **Source:** AP hold and exception records.
+- **Source:** AP hold and exception records; Payables Matching Hold Detail Report; Payables Key Indicators Report.
 - **Owner / Steward:** AP Manager / AP Specialist.
 - **Threshold:** Target <= 8%; sustained >10% triggers review.
 
@@ -186,6 +193,7 @@
 - **Source:** AP workload analytics extension or equivalent native population logic.
 - **Owner / Steward:** AP Manager / Report Steward.
 - **Threshold:** Stage-specific; trend reviewed weekly.
+- **Date Reference:** Stage age measures elapsed days from stage entry date (operational aging). This KPI measures processing timeliness, not financial delinquency. For due-date-based financial aging of AP balances, see KPI-09.
 
 ### KPI-07 - Workload Backlog Value
 - **Question:** Q1
@@ -203,20 +211,31 @@
 - **Owner / Steward:** AP Process Owner / Governance Reviewer.
 - **Threshold:** Target >= 60% without forcing poor-fit reuse.
 
+### KPI-09 - AP Outstanding Balance by Aging Tier (Financial Aging)
+- **Question:** Q4 — balance sheet provenance for all operational payables views.
+- **Formula:** Total unpaid AP invoice balance stratified by aging tier: Current (not yet due) / 1–30 DPD / 31–60 DPD / 61–90 DPD / 91–120 DPD / 120+ DPD. Days past due = as-of date minus due date. Current items have a positive days-to-due value and are excluded from past-due buckets.
+- **Grain:** As-of date snapshot; required at each period close.
+- **Date Reference:** Due date is the aging reference for all past-due buckets. As-of date must match the period-end date used in the AP-to-GL reconciliation for the same close.
+- **Source:** Payables Trial Balance Report; Payables Invoice Aging Report; Supplier Balance Aging Report; `Payables - Invoices Real Time` OTBI subject area.
+- **Owner / Steward:** AP Process Owner / AP Manager.
+- **Threshold:** No fixed target; aging tier distribution reviewed monthly. Growth in 30+ DPD concentration triggers supplier terms review. Any 90+ DPD balance requires documented explanation before period close sign-off.
+- **Governance note:** This KPI is the financial truth anchor for AP. Operational views (payment queues, hold populations, discount-capture windows, stage queues) must reconcile their total to this figure within approved tolerance before use in governance reporting.
+
 ---
 
 ## 8) Data Quality Controls
 
 | ID | Rule | Critical data | Threshold | Owner | Evidence |
 |---|---|---|---|---|---|
-| DQ-01 | Invoice IDs are unique within the governed reporting population | Invoice ID | 100% unique | AP Manager | Query validation / reconciliation |
+| DQ-01 | Invoice IDs are unique within the governed reporting population | Invoice ID | 100% unique | AP Manager | Query validation / reconciliation; Payables Invoice Audit by Voucher Number Listing; Payment Audit by Voucher Number Report |
 | DQ-02 | Required approval status and timestamp are present for paid invoices | Approval status, approval timestamp | 100% for paid invoices | AP Analyst | Approval compliance check |
 | DQ-03 | Due date and payment date are populated where on-time metric applies | Due date, payment date | >= 99.5% populated | AP Specialist | Payment timeliness check |
 | DQ-04 | Hold records have valid hold type and status fields | Hold type, hold status | >= 99% valid | AP Specialist | Hold review log |
-| DQ-05 | Duplicate investigation records have final disposition | Duplicate flag, disposition | 100% for investigated items | AP Manager | Duplicate issue log |
+| DQ-05 | Duplicate investigation records have final disposition | Duplicate flag, disposition | 100% for investigated items | AP Manager | Duplicate issue log; Payables Invoice Audit Listing |
 | DQ-06 | Stage mapping logic is versioned and current | Stage model logic | 100% governed | Report Steward | Change log |
 | DQ-07 | Owner / queue labels use approved governance mapping | Owner label | 100% approved mapping | Report Steward | Mapping file review |
-| DQ-08 | Governed reports reconcile to native AP totals where applicable | WIP amount / counts | <= approved tolerance | AP Process Owner | Reconciliation record |
+| DQ-08 | Governed reports reconcile to native AP totals where applicable | WIP amount / counts | <= approved tolerance | AP Process Owner | Reconciliation record; Payables Trial Balance Report; Payables to Ledger Reconciliation Report |
+| DQ-09 | AP aging calculations use due date as the aging reference date, not invoice date or stage entry date | Due date field | 100% populated for aged AP population | AP Specialist | Payment timeliness check; Payables Invoice Aging Report validation |
 
 ---
 
@@ -249,7 +268,103 @@ Before approving a custom AP report or dashboard, record:
 
 ---
 
-## 10) Data Issue Management
+## 10) Predefined Report Inventory
+
+Oracle Fusion Payables ships predefined reports run from the Scheduled Processes work area and accessible in the Reports and Analytics work area. The inventory below covers all Oracle-shipped reports across the seven product categories, classified by governance tier and mapped to the KPIs, controls, and DQ rules they support.
+
+**Governance tiers:**
+- **Evidence-Required** — must be run and retained per AP-5 at the prescribed frequency
+- **Close-Critical** — must be completed before payables accounting period close
+- **Operational** — run on cadence for monitoring; retain per general records schedule
+- **Reference / On-demand** — available when needed; no mandatory run or retention requirement
+
+### 10.1 Invoices
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Import Payables Invoices Report | Evidence-Required | KPI-01 | Y |
+| Payables Credit Memo Matching Report | Operational | — | Y |
+| Payables Invoice Aging Report | Operational | KPI-09 | Y |
+| Supplier Balance Aging Report | Operational | KPI-09 | Y |
+| Payables Invoice Audit by Voucher Number Listing | Evidence-Required | DQ-01 | Y |
+| Payables Invoice Audit Listing | Evidence-Required | KPI-02, DQ-05 | Y |
+| Payables Invoice Register | Operational | KPI-07 | Y |
+| Payables Key Indicators Report | Operational | KPI-05, KPI-07 | Y |
+| Payables Matched and Modified Receipts Report | Evidence-Required | KPI-01 | Y |
+| Payables Matching Detail Report | Operational | KPI-01, KPI-02 | Y |
+| Payables Matching Hold Detail Report | Evidence-Required | KPI-05 | Y |
+| Payables Negative Supplier Balance Report | Operational | — | Y |
+
+### 10.2 Payments
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Payables Cash Requirement Report | Operational | KPI-03, KPI-07 | N |
+| Payables Payment Requests Import Report | Evidence-Required | KPI-03 | Y |
+| Payables Discounts Taken and Lost Report | Operational | KPI-03 | Y |
+| Payables Payment Register | Evidence-Required | KPI-02, KPI-03 | Y |
+| Payables Selected Installments Report | Operational | KPI-03 | Y |
+| Payment Audit by Voucher Number Report | Evidence-Required | DQ-01 | Y |
+| Update Matured Bills Payable Status | Evidence-Required (if feature enabled) | — | Y |
+| Escheated Payments Listing Report | Evidence-Required | — | Y |
+
+### 10.3 Payables to Ledger Reconciliation
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Payables to Ledger Reconciliation Report | Evidence-Required | KPI-09, DQ-08 | Y |
+
+### 10.4 Period Close
+
+All six period-close reports must be reviewed before the payables accounting period can close.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Payables Open Items Revaluation Report | Operational | — | N |
+| Payables Period Close Exceptions Report | Close-Critical | — | Y |
+| Payables Posted Invoice Register | Close-Critical | DQ-08 | Y |
+| Payables Posted Payment Register | Close-Critical | DQ-08 | Y |
+| Payables Trial Balance Report | Close-Critical | KPI-09, DQ-08 | Y |
+| Payables Unaccounted Transactions and Sweep Report | Close-Critical | — | Y |
+
+### 10.5 Prepayments
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Prepayment Remittance Notice | Reference / On-demand | — | N |
+
+### 10.6 Income Tax and Withholding
+
+Tax and withholding reports have mandatory run and retention requirements driven by tax compliance obligations independent of the AP operational KPI framework.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Payables Withholding Tax by Tax Authority Report | Operational | — | Y |
+| Payables Withholding Tax Letter | Reference / On-demand | — | Y |
+| Payables Withholding Tax Report | Operational | — | Y |
+| Update and Report Income Tax Details | Evidence-Required | — | Y |
+| US 1096 Report | Evidence-Required | — | Y |
+| US 1099 Electronic Media Report | Evidence-Required | — | Y |
+| US 1099 Forms - Comma Delimited Format | Evidence-Required | — | Y |
+| US 1099 Invoice Exceptions Report | Evidence-Required | — | Y |
+| US 1099 Payments Report | Evidence-Required | — | Y |
+| US 1099 Report | Evidence-Required | — | Y |
+| US 1099 Supplier Exceptions Report | Evidence-Required | — | Y |
+
+### 10.7 Netting
+
+Netting reports apply only when AP–AR netting is configured. Cross-domain coordination with the Receivables domain is required.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Netting Settlement Letter | Reference / On-demand | — | N |
+| Netting Reversal Letter | Reference / On-demand | — | N |
+| Netting Settlement Report | Operational | — | Y |
+| Netting Settlement Listing | Operational | — | Y |
+
+---
+
+## 11) Data Issue Management
 
 1. Log issue with affected KPI, report, field, or extract.
 2. Classify severity based on decision or control impact.
@@ -265,7 +380,7 @@ Before approving a custom AP report or dashboard, record:
 
 ---
 
-## 11) Sensitive Data and Access Controls
+## 12) Sensitive Data and Access Controls
 
 - Supplier, bank, payment, tax, and restricted invoice attributes require least-privilege access.
 - Approved AP analytics shall favor queue or team views over named-person views unless specifically approved.
@@ -274,16 +389,16 @@ Before approving a custom AP report or dashboard, record:
 
 ---
 
-## 12) Adoption and Training Notes
+## 13) Adoption and Training Notes
 
 - Train AP leaders on the difference between native evidence reports and governed extension analytics.
 - Publish the canonical KPI list with plain-language definitions.
-- Review stage and owner mapping after pilot use, then at least annually.
+- Review stage and owner mapping at least annually.
 - Use the analytics intake policy for every recurring AP reporting request.
 
 ---
 
-## 13) Deck Outline - AP Data and Analytics Briefing
+## 14) Deck Outline - AP Data and Analytics Briefing
 
 1. Why AP needs governed data and analytics
 2. Native-first principle and extension boundary
@@ -294,8 +409,9 @@ Before approving a custom AP report or dashboard, record:
 
 ---
 
-## 14) Version History
+## 15) Version History
 
 | Version | Date | Change summary | Owner |
 |---|---|---|---|
 | 1.0 | 2026-05-25 | Created normalized AP governed data and analytics root artifact | AP Process Owner |
+| 1.1 | 2026-07-06 | Added Oracle Payables predefined report inventory (Section 10, 43 reports across 7 categories) with governance tier, KPI/control/DQ links, and retention flags; added Aging (AP), Past Due (AP), Current (AP), and Due Date (AP) canonical glossary terms with date-reference definitions; added KPI-09 AP Outstanding Balance by Aging Tier as financial truth anchor; added Date Reference field to KPI-03 and KPI-06; updated KPI-02, KPI-03, and KPI-05 source fields to name specific predefined reports; updated DQ-01, DQ-05, and DQ-08 evidence citations; added DQ-09 aging date reference rule; added Oracle Fusion Payables Predefined Reports 26C source anchor | AP Process Owner |

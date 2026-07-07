@@ -90,7 +90,7 @@ Every FCC AI use case must record:
 - evidence retained,
 - risk tier and decision.
 
-Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, agent pilot only, or reject.
+Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, approve agent use (bounded scope), or reject.
 
 ---
 

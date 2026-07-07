@@ -243,7 +243,7 @@ Use this checklist when applying the architecture to a new F&A domain:
 - [ ] Approved metrics, definitions, lineage, and quality rules are documented.
 - [ ] AI safe-use categories and intake routing are defined.
 - [ ] AI risk/control mapping is completed for restricted, high-risk, recurring, or control-relevant use.
-- [ ] Agent readiness is completed before any bounded agent is piloted.
+- [ ] Agent readiness is completed before any bounded agent is deployed.
 - [ ] Monitoring, exceptions, incidents, and lifecycle review are defined.
 
 ## Document Control

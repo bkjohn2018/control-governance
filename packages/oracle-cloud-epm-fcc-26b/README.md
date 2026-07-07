@@ -19,7 +19,7 @@ Governance package for Oracle Cloud EPM **Financial Consolidation and Close** (F
 
 1. Endorse controlled operations for consolidation and close.
 2. Confirm approved FCC dashboards, forms, reports, and monitoring metrics.
-3. Approve AI posture before any AI-supported consolidation analysis, close commentary, or agentic pilot.
+3. Approve AI posture before any AI-supported consolidation analysis, close commentary, or agentic use.
 
 ## Oracle reference
 

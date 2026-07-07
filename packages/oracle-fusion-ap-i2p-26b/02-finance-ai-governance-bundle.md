@@ -6,7 +6,7 @@
 - Business function: AP operations, payment governance, and AP analytics governance
 - Objective: Establish safe, controlled, auditable AI use for AP managers, process owners, analysts, specialists, controls reviewers, and analytics delivery teams
 - Audience: AP managers, AP process owners, AP operations leads, Finance Controls Lead, Data Governance / Finance Governance reviewers, IT / Analytics Delivery Owner, internal audit stakeholders
-- Maturity: Draft for pilot + operational use
+- Maturity: Operational
 - Tone: Operational, control-focused, and audit-ready
 - Source prerequisites:
   - [`01-controlled-operations.md`](01-controlled-operations.md)
@@ -19,7 +19,7 @@
 
 ### Inherited Operating Assumptions
 
-This AI governance bundle inherits the AP I2P process scope, roles, control gates, evidence expectations, metric governance, security/privacy assessment, pilot cadence, and documentation lifecycle from the AP process bundle.
+This AI governance bundle inherits the AP I2P process scope, roles, control gates, evidence expectations, metric governance, security/privacy assessment, review cadence, and documentation lifecycle from the AP process bundle.
 
 It also inherits the analytics policy's Oracle-first principle: native Oracle reporting, inquiry, workflow, audit, and system capabilities must be assessed before approving custom analytics, extracts, downstream reporting, AI-assisted analytics, or AI agents that rely on Oracle data.
 
@@ -33,12 +33,12 @@ AP teams are likely to use AI for summarization, document drafting, issue triage
 
 ### Recommended Decision
 
-Approve this AP Finance AI Governance Bundle as a pilot addendum to the AP I2P Governance Package and Analytics Intake and Extension Policy.
+Approve this AP Finance AI Governance Bundle as a governance addendum to the AP I2P Governance Package and Analytics Intake and Extension Policy.
 
 ### Requested Approval Conditions
 
 1. AI use in AP must follow the safe-use categories in this bundle.
-2. AI use cases involving AP data must complete the AI intake procedure before pilot or operational use.
+2. AI use cases involving AP data must complete the AI intake procedure before use.
 3. AI-assisted AP analytics must complete the native-first assessment required by the analytics policy.
 4. Any AI use that affects AP controls, reconciliations, audit evidence, payment decisions, supplier data, bank data, tax data, or management reporting must complete risk/control mapping.
 5. Any AI agent or agentic workflow must complete agent readiness assessment before use.
@@ -50,7 +50,7 @@ Approve this AP Finance AI Governance Bundle as a pilot addendum to the AP I2P G
 
 Enable AP teams to use AI for productivity, insight, and controlled analysis while preventing sensitive data leakage, unsupported payment or accounting conclusions, control bypass, unmanaged analytics sprawl, and audit evidence gaps.
 
-### Pilot Scope
+### Operational Scope
 
 In scope:
 - AI-assisted AP documentation, SOP drafting, issue summarization, training content, control narrative drafting, and meeting note summarization.
@@ -63,16 +63,16 @@ Out of scope unless separately approved:
 - Use of unapproved public AI tools with AP, supplier, bank, payment, tax, employee, PII, unreleased financial, audit, or confidential governance data.
 - AI-generated outputs treated as AP control evidence without source support, reviewer signoff, and retained workpapers.
 
-### Pilot Milestones
+### Operational Milestones
 
 | Milestone | Timing | Owner | Exit Criteria |
 |---|---|---|---|
-| Approve AP AI governance pilot | Week 0 | AP Process Owner | Sponsor approves scope, owners, and pilot conditions |
+| Approve AP AI governance bundle | Week 0 | AP Process Owner | Sponsor approves scope, owners, and conditions |
 | Confirm approved AI tools | Week 1 | Data Governance / Finance Governance owner | Approved tool list and prohibited tool guidance documented |
 | Publish intake and safe-use guidance | Week 1-2 | AP Manager | AP users receive AI use categories and intake procedure |
 | Complete first AI use-case reviews | Month 1 | Governance Reviewer | Initial use cases classified and routed |
 | Complete agent readiness template review | Month 2 | Finance Controls Lead | Template tested against a hypothetical AP agent |
-| Post-pilot readiness decision | Month 3 | AP Process Owner | Go / Conditional Go / No-Go recommendation documented |
+| Operational readiness review | Month 3 | AP Process Owner | Go / Conditional Go / No-Go recommendation documented |
 
 ## 3) AI Safe Use Policy Requirements
 
@@ -87,7 +87,7 @@ AI may support AP work only when it preserves Oracle as the system of record, pr
 | Permitted | Low-risk AI use with no sensitive AP data and no authoritative output without human review | Drafting generic training text, rewriting procedure language, summarizing public Oracle documentation, creating non-sensitive meeting agendas | User may proceed if tool is approved and no restricted data is entered |
 | Restricted | AI use involving internal AP process details, AP metrics, confidential data, control interpretation, analytics commentary, or recurring work products | Drafting AP KPI commentary, summarizing exception trends, analyzing approved dashboard outputs, preparing control narratives, triaging issue logs | AP Manager and Governance Reviewer approval; security/privacy review if sensitive data is involved |
 | High Risk | AI use involving payment decisions, supplier data, bank/payment data, tax data, audit evidence, control reliance, financial reporting, or broad deployment | Duplicate-risk investigation support, payment run exception analysis, AP close support, supplier bank anomaly review, control test support | AP Process Owner, Finance Controls Lead, Data Owner, and Security/Privacy Reviewer approval |
-| Agentic | AI can call tools, access systems, retrieve AP data, execute workflow steps, schedule runs, or recommend actions in a controlled process | Agent that monitors payment exceptions, prepares draft remediation tickets, or compiles evidence packets | Agent readiness assessment required before pilot |
+| Agentic | AI can call tools, access systems, retrieve AP data, execute workflow steps, schedule runs, or recommend actions in a controlled process | Agent that monitors payment exceptions, prepares draft remediation tickets, or compiles evidence packets | Agent readiness assessment required before deployment |
 | Prohibited | AI use that bypasses AP controls, discloses sensitive data to unapproved tools, or delegates accountable AP decisions to AI | Autonomous payment release, approval bypass, supplier bank change, unsupported accounting/tax conclusion, credential sharing, unapproved external supplier communication | Not allowed unless governance formally redesigns the control environment |
 
 ### Data Handling Requirements
@@ -155,7 +155,7 @@ Complete AI intake before using AI for AP data, AP analytics, AP controls, recur
 | Allowed low-risk use | Approved AI tool, no sensitive data, no control reliance | Document safe-use obligations |
 | Restricted use approved | Internal AP or analytics support with review | Complete intake and retain approval |
 | Governed AI use approved | Control-relevant, sensitive, recurring, or management-facing use | Complete risk/control mapping and security/privacy review |
-| Agent pilot approved | AI can call tools, access systems, schedule work, or execute steps | Complete agent readiness assessment |
+| Agent use approved | AI can call tools, access systems, schedule work, or execute steps | Complete agent readiness assessment |
 | Conditional approval | Use may proceed after conditions are met | Track conditions, owner, due date, and evidence |
 | Rejected / prohibited | Use is unclear, duplicate, unsafe, unsupported, or control-bypassing | Document rationale and alternative |
 
@@ -195,7 +195,7 @@ Complete AI intake before using AI for AP data, AP analytics, AP controls, recur
 - Tools/systems accessed:
 - Data sources:
 - Outputs/actions:
-- Pilot or production status:
+- Deployment status:
 
 ### Scope Boundaries
 
@@ -222,7 +222,7 @@ The agent may not:
 | Read sensitive AP data | Restricted, least privilege | Security/Privacy and Data Owner approval | Access approval and data handling record |
 | Write draft notes/tickets | Draft only | AP Manager review before finalization | Draft record and reviewer signoff |
 | Update AP systems | Prohibited unless separately governed | Formal redesign required | Not applicable |
-| Send external communication | Prohibited for pilot | Formal approval required | Not applicable |
+| Send external communication | Prohibited unless separately governed | Formal approval required | Not applicable |
 | Schedule recurring runs | Conditional | Monitoring owner and cadence defined | Schedule, log, monitoring review |
 
 ### Readiness Decision
@@ -237,7 +237,7 @@ The agent may not:
 | Logging | Prompts, inputs, outputs, tool calls, approvals, and exceptions logged where feasible | Pending |
 | Rollback | Containment and correction process documented | Pending |
 | Monitoring | Owner, cadence, signals, and escalation defined | Pending |
-| Recertification | Triggered by model/tool/prompt/data/permission/workflow change and at least quarterly during pilot | Pending |
+| Recertification | Triggered by model/tool/prompt/data/permission/workflow change and at least quarterly | Pending |
 
 Decision options: Ready / Ready with Conditions / Not Ready / Prohibited.
 
@@ -332,9 +332,7 @@ Log and escalate:
 
 ### Review Cadence
 
-- Monthly during AP AI pilot.
-- Quarterly after formalization if no critical incidents remain open.
-- Immediate review after material incident, tool/vendor change, agent permission change, AP control failure, audit finding, or policy exception.
+- Quarterly, or immediately after a material incident, tool/vendor change, agent permission change, AP control failure, audit finding, or policy exception.
 
 ### Recertification Triggers
 
@@ -366,15 +364,15 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed.
 |---|---|
 | Document title | AP Finance AI Safe Use and Agent Readiness Governance Bundle |
 | Document ID | AP-AI-GOV-001 |
-| Version | 1.0 Draft |
-| Status | Draft for AP AI pilot readiness review |
+| Version | 1.0 |
+| Status | Active |
 | Document owner | AP Process Owner |
 | Content owners | AP Manager, Finance Controls Lead, Governance Reviewer |
 | Reviewers | AP Manager, Finance Controls Lead, Data Owner, Security/Privacy Reviewer, IT / Analytics Delivery Owner |
 | Approval authority | Finance leadership sponsor and AP Process Owner |
-| Effective date | To be assigned at pilot approval |
+| Effective date | 2026-07-06 |
 | Controlled copy location | Governed AP control repository, exact path to be assigned |
-| Review cadence | Monthly during pilot; quarterly after formalization; immediate review after material AI change or incident |
+| Review cadence | Quarterly; immediate review after material AI change or incident |
 | Retention period | 7 years for control-relevant AI evidence; 3 years minimum for governance review records unless local policy requires longer |
 | Supersedes | New AI governance addendum |
 | Related documents | AP I2P Governance Package; Analytics Intake and Extension Policy |
@@ -383,13 +381,13 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed.
 
 | Version | Date | Change Summary | Owner | Status |
 |---|---|---|---|---|
-| 1.0 Draft | Current | Initial AP AI governance bundle inheriting AP process and analytics prerequisites | AP Process Owner | Draft for review |
+| 1.0 | 2026-07-06 | Initial AP AI governance bundle inheriting AP process and analytics prerequisites; promoted from draft to active | AP Process Owner | Active |
 
 ### Approval Record
 
 | Approver | Role | Decision | Date | Conditions |
 |---|---|---|---|---|
-| TBD | Finance leadership sponsor | Pending | TBD | Confirm pilot authorization and rollout scope |
+| TBD | Finance leadership sponsor | Pending | TBD | Confirm authorization and rollout scope |
 | TBD | AP Process Owner | Pending | TBD | Confirm ownership, review cadence, and controlled copy location |
 | TBD | Finance Controls Lead | Pending | TBD | Confirm AI control evidence, testing, and remediation workflow |
 | TBD | Security/Privacy Reviewer | Pending | TBD | Confirm approved tool and data handling requirements |
@@ -402,7 +400,7 @@ Training should emphasize:
 - AP-sensitive data cannot be entered into unapproved AI tools.
 - AI-supported AP analytics must follow the native-first assessment and governed extension criteria.
 - AI output used for AP controls, audit, close, reconciliation, payment, or management review must be validated and evidenced.
-- Agents require readiness assessment before pilot or use.
+- Agents require readiness assessment before use.
 
 Suggested rollout sequence:
 1. Publish safe-use quick guide for AP users.
@@ -422,23 +420,23 @@ Suggested rollout sequence:
 7. Agent readiness requirements.
 8. Security/privacy and data handling expectations.
 9. Monitoring, exceptions, incidents, and recertification.
-10. Decision request and pilot approval conditions.
+10. Decision request and leadership approval.
 
 ## 16) Open Decisions and Questions
 
 | Open Decision | Owner | Needed Before |
 |---|---|---|
-| Approved AI tool list for AP users | Data Governance / Finance Governance owner | Pilot launch |
+| Approved AI tool list for AP users | Data Governance / Finance Governance owner | Deployment |
 | Whether enterprise AI tools retain prompts/outputs or use data for training | Security/Privacy Reviewer | Any restricted use |
 | Controlled copy location for AI governance bundle | AP Process Owner | Formal approval |
-| Intake repository and tracking workflow | Governance Reviewer | Pilot launch |
+| Intake repository and tracking workflow | Governance Reviewer | Deployment |
 | Standard evidence retention location for AI-supported outputs | Finance Controls Lead | First high-risk use case |
 | Whether any AP vendor AI features are already active | IT / Analytics Delivery Owner | Full inventory |
 | Whether Oracle-native AI features are available in tenant and governed by existing controls | IT / Analytics Delivery Owner | AI capability assessment |
-| Agent pilot candidate, if any | AP Process Owner | Agent readiness tabletop |
+| Agent deployment candidate, if any | AP Process Owner | Agent readiness tabletop |
 
 ## 17) Change Log
 
 | Date | Change | Reason | Approved By |
 |---|---|---|---|
-| Current draft | Initial AP AI governance bundle created | Establish pilot-ready AI governance addendum for AP I2P and AP analytics | Pending |
+| 2026-07-06 | Initial AP AI governance bundle created; promoted to active | Establish AI governance addendum for AP I2P and AP analytics | AP Process Owner |

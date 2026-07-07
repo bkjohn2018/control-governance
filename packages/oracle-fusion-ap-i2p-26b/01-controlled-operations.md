@@ -21,7 +21,7 @@
 | Governance objective | Establish controlled, auditable, and repeatable AP invoice-to-pay operations that preserve invoice integrity, approval compliance, payment accuracy, and retained evidence |
 | Primary audience | AP Process Owner, AP Managers, AP Analysts, Finance Controls Lead, Controllership, Internal Audit |
 | Reference pattern | Oracle-native process execution wrapped with explicit control ownership, SOP evidence, issue routing, and monthly governance review |
-| Maturity (current -> target) | Pilot -> Defined |
+| Maturity (current -> target) | Foundational -> Defined |
 | Tone | Operational, control-focused, and evidence-oriented |
 | Non-goals | Procurement sourcing governance, supplier master governance, AR operations, enterprise record-to-report design outside AP posting and reconciliation handoffs |
 
@@ -35,7 +35,7 @@
 
 **What is ready.** A six-stage AP operating model, five core control points, named AP role accountability, control evidence expectations, monthly review rhythm, and a baseline issue workflow.
 
-**What remains.** Final owner names, tenant-specific workflow/report names, and pilot-based threshold tuning after the first 90 days.
+**What remains.** Final owner names and tenant-specific workflow and report name confirmation.
 
 **What we ask of leadership.**
 1. Approve this controlled operations baseline for AP I2P.
@@ -69,10 +69,8 @@ Establish mandatory operating, control, and evidence requirements for supplier i
 | Temporary intake bypass for emergency processing | AP Manager | Per event |
 | Approval-path override requiring compensating review | AP Process Owner + Finance Controls Lead | 30 days |
 | Payment release exception with unresolved duplicate-risk warning | AP Manager + Finance Controls Lead | Per payment run |
-| Temporary control threshold exception during pilot calibration | AP Process Owner | Through pilot window |
-
 ### 2.5 Review Cadence
-Monthly during pilot operation; quarterly after formalization; immediately after material control failure, audit issue, workflow redesign, or major Oracle release impact.
+Quarterly; immediately after material control failure, audit issue, workflow redesign, or major Oracle release impact.
 
 ---
 
@@ -207,9 +205,9 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 |---|---|---|---|---|---|---|---|---|
 | C-01 | Intake completeness | Incomplete or misrouted invoices enter workflow | Preventive | AP Manager | AP Process Owner | Daily | Intake checklist / queue log | SOP-01 / CP-01 |
 | C-02 | Validation discipline | Invalid invoices proceed to approval | Preventive | AP Specialist | AP Manager | Daily | Validation checklist | SOP-02 / CP-02 |
-| C-03 | Approval compliance | Payments occur without required authorization | Preventive | AP Manager | AP Process Owner | Per invoice / run | Workflow approval history | SOP-03 / CP-03 |
-| C-04 | Duplicate prevention | Duplicate payment leakage | Detective | AP Manager | Finance Controls Lead | Per payment run | Duplicate check output | SOP-04 / CP-04 |
-| C-05 | Hold / exception review | Restricted or unresolved items are paid | Preventive | AP Specialist | AP Manager | Per payment run | Hold review log | SOP-04 / CP-04 |
+| C-03 | Approval compliance | Payments occur without required authorization | Preventive | AP Manager | AP Process Owner | Per invoice / run | Workflow approval history; Payables Payment Register | SOP-03 / CP-03 |
+| C-04 | Duplicate prevention | Duplicate payment leakage | Detective | AP Manager | Finance Controls Lead | Per payment run | Duplicate check output; Payables Invoice Audit Listing | SOP-04 / CP-04 |
+| C-05 | Hold / exception review | Restricted or unresolved items are paid | Preventive | AP Specialist | AP Manager | Per payment run | Hold review log; Payables Matching Hold Detail Report | SOP-04 / CP-04 |
 | C-06 | Payment release approval | Unauthorized payment execution | Preventive | AP Manager | AP Process Owner | Per payment run | Release authorization | SOP-05 / CP-04 |
 | C-07 | Monthly governance review | Repeat failures persist without action | Detective | AP Process Owner | Finance Controls Lead | Monthly | Scorecard and minutes | SOP-06 / CP-05 |
 | C-08 | Issue remediation tracking | Exceptions remain unresolved or unowned | Corrective | AP Process Owner | Finance Controls Lead | Weekly / monthly | Issue register | SOP-06 / CP-05 |
@@ -254,7 +252,7 @@ Log an AP operations issue when a control fails, an exception repeats, evidence 
 
 ## 9) Adoption and Training Notes
 
-- Train AP Analysts and AP Specialists on the control points before pilot start.
+- Train AP Analysts and AP Specialists on the control points before go-live.
 - Use monthly review sessions to calibrate thresholds and clarify repeated exception causes.
 - Treat workflow evidence and issue logging as part of standard execution, not add-on documentation.
 - Refresh training after material Oracle workflow or policy changes.
@@ -268,7 +266,7 @@ Log an AP operations issue when a control fails, an exception repeats, evidence 
 3. Named role accountability and RACI
 4. Core control matrix and evidence model
 5. Monthly review rhythm, KPI oversight, and remediation process
-6. Pilot decisions and leadership asks
+6. Leadership decisions and asks
 
 ---
 
@@ -277,3 +275,4 @@ Log an AP operations issue when a control fails, an exception repeats, evidence 
 | Version | Date | Change summary | Owner |
 |---|---|---|---|
 | 1.0 | 2026-05-25 | Normalized AP controlled-operations root artifact created from the existing AP governance package | AP Process Owner |
+| 1.1 | 2026-07-06 | Updated C-03, C-04, and C-05 evidence columns to name specific Oracle predefined reports (Payables Payment Register, Payables Invoice Audit Listing, Payables Matching Hold Detail Report) | AP Process Owner |

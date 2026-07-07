@@ -106,7 +106,7 @@ Every project AI use case shall capture:
 - retained evidence,
 - risk tier and routing decision.
 
-Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, approve agent pilot, or reject.
+Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, approve agent use (bounded scope), or reject.
 
 ---
 
@@ -204,7 +204,7 @@ Escalate and log:
 
 - Train project managers and team members on what Oracle Digital Assistant can and cannot do.
 - Make ownership and review rules explicit for issue creation and status updates.
-- Start with approved native assistant capabilities before any broader agentic pilots.
+- Start with approved native assistant capabilities before any broader agentic use.
 
 ---
 

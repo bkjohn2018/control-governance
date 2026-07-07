@@ -19,7 +19,7 @@ Governance package for Oracle Fusion Cloud Fixed Assets / Assets release **26B**
 
 1. Endorse controlled operations for the asset lifecycle and close.
 2. Confirm approved asset reporting, extract freshness, and reconciliation discipline.
-3. Approve AI posture before any AI-supported asset analysis or agentic pilot.
+3. Approve AI posture before any AI-supported asset analysis or agentic use.
 
 ## Oracle reference
 

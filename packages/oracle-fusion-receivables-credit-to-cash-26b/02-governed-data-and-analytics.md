@@ -7,6 +7,7 @@
 > Source anchors:
 > - [Overview of Oracle Receivables](https://docs.oracle.com/en/cloud/saas/financials/26b/fairp/overview-of-oracle-receivables.html)
 > - [Subject Areas for Transactional Business Intelligence in Financials 26B](https://docs.oracle.com/en/cloud/saas/financials/26b/faofb/subject-areas-for-transactional-business-intelligence-in-financials.pdf)
+> - [Oracle Receivables Predefined Reports 26C](https://docs.oracle.com/en/cloud/saas/financials/26c/faofc/oracle-receivables-predefined-reports.html)
 > - *Using Receivables Credit to Cash 26B*
 
 ---
@@ -130,6 +131,10 @@
 | Credit Profile | Customer creditworthiness record including limits, classifications, and review cycle | Credit Manager | Credit Analyst | Customer credit record | "Risk score" alone |
 | Dispute | Customer challenge to billing accuracy requiring research and resolution | AR Manager | Billing Specialist | Billing dispute | "Complaint" |
 | AR-to-GL Reconciliation | Comparison of receivables subledger balances to general ledger | AR Process Owner | Revenue Accountant | Subledger reconciliation | "Balance check" |
+| Aging (AR) | Elapsed days since the due date for AR transactions not yet collected as of the reporting as-of date, grouped into approved aging bucket boundaries per the Oracle Aging Methods configuration. Items where the due date has not yet been reached are classified as Current and excluded from aging buckets | AR Process Owner | AR Manager | Receivables aging; past-due aging | "Days outstanding" when past-due meaning is intended; "aging" to mean workload volume |
+| Past Due (AR) | An AR transaction where the due date has passed and full collection has not been received as of the as-of date. Days past due = as-of date minus due date | AR Manager | Billing Specialist | Overdue receivable | "Outstanding" alone |
+| Current (AR) | An AR transaction outstanding within approved payment terms; the due date has not yet been reached as of the as-of date. Current items are excluded from all past-due aging buckets | AR Manager | Billing Specialist | Not yet due | "Current aging" (a contradiction in terms) |
+| Due Date (AR) | The date by which payment is contractually required, calculated as transaction date plus the payment terms assigned to the customer or transaction. The due date is the reference date for all AR aging calculations | AR Manager | Billing Specialist | Payment due date | "Invoice date" when due date is meant |
 
 ---
 
@@ -147,7 +152,7 @@
 - **Question:** Q2
 - **Formula:** Successfully imported AutoInvoice records / total imported records.
 - **Grain:** Import run and monthly aggregate.
-- **Source:** AutoInvoice import log and error report.
+- **Source:** Import AutoInvoice Execution Report; Invoices Posted to Suspense Report.
 - **Owner / Steward:** AR Manager / Billing Specialist.
 - **Threshold:** Green >= 97%; Amber 94% to <97%; Red <94%.
 
@@ -158,6 +163,7 @@
 - **Source:** `Receivables - Receipts Details Real Time`.
 - **Owner / Steward:** AR Manager / Cash Application Specialist.
 - **Threshold:** Target <= 5%; sustained >8% triggers review.
+- **Date Reference:** Unapplied receipt age measured from receipt date (date the receipt was posted). As-of date must be specified at report run and must match the as-of date used for the same period's financial reporting.
 
 ### KPI-04 — Unapplied Receipt Aging Over Threshold
 - **Question:** Q3, Q4
@@ -166,6 +172,7 @@
 - **Source:** `Receivables - Receipts Details Real Time`.
 - **Owner / Steward:** AR Manager / Cash Application Specialist.
 - **Threshold:** Age threshold set by collection policy; trend reviewed weekly.
+- **Date Reference:** Unapplied receipt aging measured from receipt date (date the receipt was posted). The approved age threshold is measured in calendar days from receipt date to as-of date. This metric measures cash application timeliness, not invoice delinquency; see KPI-11 for due-date-based financial aging.
 
 ### KPI-05 — Receipt Application Accuracy
 - **Question:** Q4
@@ -187,7 +194,7 @@
 - **Question:** Q5
 - **Formula:** Transactions with active revenue contingencies above approved age threshold.
 - **Grain:** Monthly.
-- **Source:** `Receivables - Revenue Adjustments Real Time` and revenue reports.
+- **Source:** `Receivables - Revenue Adjustments Real Time`; Recognize Revenue Execution Report.
 - **Owner / Steward:** Revenue Accountant / AR Process Owner.
 - **Threshold:** Material open contingencies escalate to controller review.
 
@@ -203,7 +210,7 @@
 - **Question:** Q7
 - **Formula:** Count or amount of reconciliation items above approved tolerance.
 - **Grain:** Per close.
-- **Source:** AR reconciliation reporting and subledger-to-GL views.
+- **Source:** Prepare Receivables to General Ledger Reconciliation; Receivables to General Ledger Reconciliation Report; Receivables Aging by General Ledger Account Report; Potential Reconciling Items Report.
 - **Owner / Steward:** AR Process Owner / Revenue Accountant.
 - **Threshold:** Material unresolved items block period close signoff.
 
@@ -215,20 +222,30 @@
 - **Owner / Steward:** AR Process Owner / Governance Reviewer.
 - **Threshold:** Target >= 60% without forcing poor-fit reuse.
 
+### KPI-11 — AR Outstanding Balance by Aging Tier (Financial Aging)
+- **Question:** Q7 — balance sheet provenance for all operational aging views.
+- **Formula:** Total open AR transaction amount stratified by aging tier: Current (not yet due) / 1–30 DPD / 31–60 DPD / 61–90 DPD / 91–120 DPD / 120+ DPD. Days past due = as-of date minus due date. Current items have a positive days-to-due value and are excluded from past-due buckets.
+- **Grain:** As-of date snapshot; required at each period close.
+- **Date Reference:** Due date is the aging reference for all past-due buckets. As-of date must match the period-end date used in the Receivables to General Ledger Reconciliation Report for the same close. Aging bucket boundaries follow the approved Oracle Aging Methods configuration.
+- **Source:** Receivables Aging by General Ledger Account Report; `Receivables - Payment Schedules Real Time` OTBI subject area.
+- **Owner / Steward:** AR Process Owner / AR Manager.
+- **Threshold:** No fixed target; aging tier distribution reviewed monthly. Material shift in 90+ DPD concentration escalates to controller review.
+- **Governance note:** This KPI is the financial truth anchor. All operational aging views (collector queues, credit exposure, dunning populations) must reconcile their total to this figure within approved tolerance before use in governance reporting.
+
 ---
 
 ## 8) Data Quality Controls
 
 | ID | Rule | Critical data | Threshold | Owner | Evidence |
 |---|---|---|---|---|---|
-| DQ-01 | Transaction IDs are unique within the governed reporting population | Transaction ID | 100% unique | AR Manager | Query validation |
+| DQ-01 | Transaction IDs are unique within the governed reporting population | Transaction ID | 100% unique | AR Manager | Query validation; Document Number Audit Report |
 | DQ-02 | Required completion or approval status is present for governed billing metrics | Completion / approval status | 100% for in-scope transactions | Billing Specialist | Completion review check |
 | DQ-03 | Receipt application status and dates are populated where cash metrics apply | Application status, application date | >= 99.5% populated | Cash Application Specialist | Application accuracy check |
 | DQ-04 | Customer and bill-to site references are valid for governed AR reports | Customer, bill-to site | 100% valid | Billing Specialist | Customer master reconciliation |
 | DQ-05 | Revenue contingency status is consistent with revenue policy logic | Contingency status | 100% for governed revenue reporting | Revenue Accountant | Revenue policy review |
 | DQ-06 | Credit limit and profile fields are current for credit-managed customers | Credit limit, review date | 100% current or flagged | Credit Analyst | Credit profile review |
-| DQ-07 | AutoInvoice error disposition is recorded for rejected records | Error code, disposition | 100% for investigated items | Billing Specialist | Import issue log |
-| DQ-08 | Governed reports reconcile to native AR totals where applicable | Open AR amount / counts | <= approved tolerance | AR Process Owner | Reconciliation record |
+| DQ-07 | AutoInvoice error disposition is recorded for rejected records | Error code, disposition | 100% for investigated items | Billing Specialist | Import issue log; Import AutoInvoice Execution Report |
+| DQ-08 | Governed reports reconcile to native AR totals where applicable | Open AR amount / counts | <= approved tolerance | AR Process Owner | Reconciliation record; Receivables to General Ledger Reconciliation Report |
 
 ---
 
@@ -257,7 +274,105 @@ Source transaction, receipt, or credit record -> governed metric logic -> dashbo
 
 ---
 
-## 10) Data Issue Management
+## 10) Predefined Report Inventory
+
+Oracle Fusion Receivables ships predefined reports run from the Scheduled Processes work area and accessible in the Reports and Analytics work area. The inventory below covers all Oracle-shipped reports across the seven product categories, classified by governance tier and mapped to the KPIs, controls, and DQ rules they support.
+
+**Governance tiers:**
+- **Evidence-Required** — must be run and retained per AR-8 at the prescribed frequency
+- **Close-Critical** — must be completed before receivables accounting period close
+- **Operational** — run on cadence for monitoring; retain per general records schedule
+- **Reference / On-demand** — available when needed; no mandatory run or retention requirement
+
+### 10.1 Bill Presentment Templates
+
+Print templates for customer-facing transaction documents. No governance run requirement; produced on demand by the billing team.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Print Invoices Template | Reference / On-demand | — | N |
+| Print Credit Memos Template | Reference / On-demand | — | N |
+| Print Debit Memos Template | Reference / On-demand | — | N |
+| Print Chargebacks Template | Reference / On-demand | — | N |
+| Print Summary Balance Forward Bills Template | Reference / On-demand | — | N |
+| Print Detailed Balance Forward Bills Template | Reference / On-demand | — | N |
+| Print Bills Receivable Template | Reference / On-demand | — | N |
+
+### 10.2 Accounting Reports
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Bad Debt Provision Report | Operational | KPI-08 | Y |
+| Invoices Posted to Suspense Report | Evidence-Required | KPI-02, C-02 | Y |
+| Potential Reconciling Items Report | Close-Critical | KPI-09, C-08 | Y |
+
+### 10.3 Billing Reports
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Billing History Report | Operational | KPI-01, KPI-06 | Y |
+| Import AutoInvoice Execution Report | Evidence-Required | KPI-02, C-02, DQ-07 | Y |
+| Print Adjustments Report | Operational | KPI-06, C-03 | Y |
+| Transaction Details Report | Operational | KPI-01 | Y |
+
+### 10.4 Receivables Balances Reports
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Automatic Receipt Creation and Remittance Execution Report | Evidence-Required | KPI-03 | Y |
+| Bank Risk Report | Operational | KPI-03, KPI-04 | Y |
+| Clear Receipts Automatically Execution Report | Evidence-Required | KPI-03 | Y |
+| Create Automatic Receipt Write-offs Execution Report | Evidence-Required | KPI-03 | Y |
+| Create Customer Statements Execution Report | Reference / On-demand | — | N |
+| Customer Account Status Report | Operational | KPI-08 | Y |
+| Customer Balances Revaluation Report | Operational | KPI-09 | N |
+| Document Number Audit Report | Evidence-Required | DQ-01 | Y |
+| Format Automatic Receipts Report | Reference / On-demand | — | N |
+| Generate Late Charges Report | Operational | KPI-04 | N |
+| Process Receipts Through Lockbox Execution Report | Evidence-Required | KPI-03, KPI-04 | Y |
+| Receipts Awaiting Bank Clearance Report | Operational | KPI-03, KPI-04 | Y |
+| Receipts Awaiting Remittance Report | Operational | KPI-03 | Y |
+| Receipts Days Late Analysis Report | Operational | KPI-04, KPI-05 | Y |
+| Receivables Aging by General Ledger Account Report | Close-Critical | KPI-09 | Y |
+| Receivables Open Items Revaluation Report | Operational | KPI-09 | N |
+| Receivables Projected Gains and Losses Report | Operational | — | N |
+| Recognize Revenue Execution Report | Evidence-Required | KPI-07, C-06 | Y |
+| Reversal Status Report | Close-Critical | KPI-03 | Y |
+
+### 10.5 Bills Receivable Reports
+
+Bills receivable reports apply only when the Bills Receivable feature is enabled in the tenant configuration.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Automatic Bills Receivable Remittance Execution Report | Evidence-Required (if feature enabled) | — | Y |
+| Automatic Bills Receivable Transactions Batch Report | Evidence-Required (if feature enabled) | — | Y |
+| Close Matured Bills Receivable Execution Report | Evidence-Required (if feature enabled) | — | Y |
+| Print Bills Receivable Report | Reference / On-demand | — | N |
+
+### 10.6 Netting Settlement Reports
+
+Netting reports apply only when AP–AR netting is configured. Cross-domain coordination with the Accounts Payable domain is required.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Netting Settlement Letter | Reference / On-demand | — | N |
+| Netting Reversal Letter | Reference / On-demand | — | N |
+| Netting Settlement Report | Operational | — | Y |
+| Netting Settlement Listing | Operational | — | Y |
+
+### 10.7 Reconciliation Process and Report
+
+Both steps must be completed in sequence. The Prepare Receivables to General Ledger Reconciliation process must run before the Reconciliation Report reflects current period data.
+
+| Report | Governance Tier | KPI / Control / DQ Link | Retention Required |
+|---|---|---|---|
+| Prepare Receivables to General Ledger Reconciliation | Close-Critical | KPI-09, C-08, DQ-08 | Y |
+| Receivables to General Ledger Reconciliation Report | Evidence-Required | KPI-09, C-08, DQ-08 | Y |
+
+---
+
+## 11) Data Issue Management
 
 1. Log issue with affected report, metric, customer, transaction, or receipt context.
 2. Assess whether billing, cash application, revenue, credit, or close decisions are impacted.
@@ -266,7 +381,7 @@ Source transaction, receipt, or credit record -> governed metric logic -> dashbo
 
 ---
 
-## 11) Sensitive Data and Access Controls
+## 12) Sensitive Data and Access Controls
 
 - Access to AR reporting follows least privilege and approved Receivables security roles.
 - Report folders and distribution lists must align to approved customer and financial data access.
@@ -274,7 +389,7 @@ Source transaction, receipt, or credit record -> governed metric logic -> dashbo
 
 ---
 
-## 12) Adoption and Training Notes
+## 13) Adoption and Training Notes
 
 - Train users on the difference between transaction, receipt, adjustment, revenue, and credit reporting subject areas.
 - Publish approved drill-path and parameter guidance for close-critical AR reports.
@@ -282,7 +397,7 @@ Source transaction, receipt, or credit record -> governed metric logic -> dashbo
 
 ---
 
-## 13) Deck Outline — AR Data and Analytics Briefing
+## 14) Deck Outline — AR Data and Analytics Briefing
 
 1. Oracle-first reporting posture for Credit to Cash
 2. Canonical KPI and glossary baseline
@@ -292,8 +407,9 @@ Source transaction, receipt, or credit record -> governed metric logic -> dashbo
 
 ---
 
-## 14) Version History
+## 15) Version History
 
 | Version | Date | Change summary | Owner |
 |---|---|---|---|
 | 1.0 | 2026-06-20 | Initial AR governed data and analytics package created from Oracle Receivables 26B source anchors | AR Process Owner |
+| 1.1 | 2026-07-06 | Added Oracle Receivables predefined report inventory (Section 10, 43 reports across 7 categories) with governance tier, KPI/control/DQ links, and retention flags; added Aging (AR), Past Due (AR), Current (AR), and Due Date (AR) canonical glossary terms with date-reference definitions; added KPI-11 AR Outstanding Balance by Aging Tier as financial truth anchor; added Date Reference field to KPI-03 and KPI-04; updated KPI-02, KPI-07, KPI-09 source fields to name specific predefined reports; updated DQ-01, DQ-07, DQ-08 evidence citations; added Oracle Receivables Predefined Reports 26C source anchor | AR Process Owner |

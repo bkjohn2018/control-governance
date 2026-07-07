@@ -31,7 +31,7 @@ Governance package for **Oracle Cloud EPM Planning Modules**, covering applicati
 
 1. Endorse controlled operations for application configuration, planning cycles, and Capital module.
 2. Confirm approved forms, dashboards, and KPIs for each active module.
-3. Approve AI posture before any AI-assisted forecast, predictive planning, or agentic pilot.
+3. Approve AI posture before any AI-assisted forecast, predictive planning, or agentic use.
 
 ## Oracle reference
 

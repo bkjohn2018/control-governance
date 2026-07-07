@@ -33,7 +33,7 @@
 
 **What is ready.** A domain-specific safe-use policy, intake fields, initial AR AI risk matrix, and a bounded-agent template that prevents receipt application, credit override, and revenue certification delegation.
 
-**What remains.** Tenant-specific approved tool inventory, named approvers, and recurring AI monitoring cadence after pilot activation.
+**What remains.** Tenant-specific approved tool inventory, named approvers, and recurring AI monitoring cadence.
 
 **What we ask of leadership.**
 1. Endorse the AR AI safe-use policy in Section 3.
@@ -108,7 +108,7 @@ Retain, as appropriate:
 
 Every AR AI use case must record business question, process area, intended users, approved data involved, native capability reviewed first, control relevance, required reviewer, evidence retained, risk tier, and decision outcome.
 
-Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, agent pilot only, or reject.
+Decision outcomes: allow low-risk use, approve with conditions, require high-risk review, approve agent use (bounded scope), or reject.
 
 ---
 

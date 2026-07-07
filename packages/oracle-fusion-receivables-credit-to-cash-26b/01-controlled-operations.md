@@ -62,6 +62,7 @@ Establish mandatory operating, control, and evidence requirements for customer b
 8. **AR-8 Evidence retention.** Critical billing, receipt, revenue, credit, and reconciliation evidence shall be retained in governed locations.
 9. **AR-9 Exception governance.** Exceptions shall be documented with owner, rationale, due date, and escalation path.
 10. **AR-10 Monthly review.** AR governance owners shall review KPI results, unapplied cash aging, revenue exceptions, credit breaches, and repeated control failures monthly.
+11. **AR-11 Aging method standard.** The Oracle Aging Methods configuration used for governed AR aging reports, collection queues, and dunning plans shall follow the approved bucket structure (Current / 1–30 / 31–60 / 61–90 / 91–120 / 120+ days past due, measured from due date). Changes to the aging method configuration require Finance Controls Lead approval before implementation.
 
 ### 2.4 Exception Authority
 
@@ -71,8 +72,6 @@ Establish mandatory operating, control, and evidence requirements for customer b
 | Credit limit override above policy threshold | Credit Manager + AR Process Owner | Per customer / order |
 | Receipt application exception with unresolved remittance error | AR Manager + Finance Controls Lead | Per batch |
 | Revenue contingency release without standard approval path | Revenue Accountant + Controller delegate | Per transaction set |
-| Temporary control threshold exception during pilot calibration | AR Process Owner | Through pilot window |
-
 ### 2.5 Review Cadence
 Monthly during initial operation; quarterly after formalization; immediately after material control failure, audit issue, workflow redesign, or major Oracle release impact.
 
@@ -223,14 +222,15 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 | ID | Control objective | Risk addressed | Type | Owner | Reviewer | Frequency | Evidence | SOP / CP link |
 |---|---|---|---|---|---|---|---|---|
 | C-01 | Transaction completion discipline | Incomplete or unauthorized billing enters collection | Preventive | AR Manager | AR Process Owner | Daily | Completion review record | SOP-01 / CP-01 |
-| C-02 | AutoInvoice error management | Imported billing data is unreliable | Detective | Billing Specialist | AR Manager | Per import | Import / error report | SOP-02 / CP-02 |
-| C-03 | Adjustment approval compliance | Unauthorized credits or adjustments post | Preventive | AR Manager | AR Process Owner | Per adjustment | Approval workflow record | SOP-03 / CP-03 |
+| C-02 | AutoInvoice error management | Imported billing data is unreliable | Detective | Billing Specialist | AR Manager | Per import | Import AutoInvoice Execution Report; Invoices Posted to Suspense Report | SOP-02 / CP-02 |
+| C-03 | Adjustment approval compliance | Unauthorized credits or adjustments post | Preventive | AR Manager | AR Process Owner | Per adjustment | Approval workflow record; Print Adjustments Report | SOP-03 / CP-03 |
 | C-04 | Receipt application accuracy | Cash misapplied or left unapplied | Preventive | Cash Application Specialist | AR Manager | Daily | Application log | SOP-04 / CP-04 |
 | C-05 | Unapplied cash monitoring | Collection delays and misstatement risk | Detective | AR Manager | AR Process Owner | Daily / weekly | Unapplied receipt report | SOP-04 / CP-04 |
 | C-06 | Revenue recognition oversight | Revenue posted outside policy | Preventive | Revenue Accountant | AR Process Owner | Per run / period | Revenue run review | SOP-05 / CP-05 |
 | C-07 | Credit limit enforcement | Unauthorized customer exposure | Preventive | Credit Manager | AR Process Owner | Per request / review | Credit authorization record | SOP-06 / CP-06 |
-| C-08 | AR reconciliation review | AR balances do not reconcile to GL before close | Detective | AR Manager | Finance Controls Lead | Per close | Reconciliation evidence | SOP-07 / CP-07 |
+| C-08 | AR reconciliation review | AR balances do not reconcile to GL before close | Detective | AR Manager | Finance Controls Lead | Per close | Receivables to GL Reconciliation Report; Potential Reconciling Items Report | SOP-07 / CP-07 |
 | C-09 | Monthly governance review | Repeat failures persist without action | Detective | AR Process Owner | Finance Controls Lead | Monthly | Scorecard and minutes | SOP-07 / CP-07 |
+| C-10 | Aging method configuration governance | Aging bucket definitions change without authorization, invalidating financial and operational aging comparability | Preventive | AR Process Owner | Finance Controls Lead | Per change event | Change request and approval record | SOP-07 / CP-07 |
 
 ---
 
@@ -286,3 +286,4 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 | Version | Date | Change summary | Owner |
 |---|---|---|---|
 | 1.0 | 2026-06-20 | Initial AR Credit to Cash controlled-operations package created from Oracle Receivables 26B source anchors | AR Process Owner |
+| 1.1 | 2026-07-06 | Added AR-11 aging method standard policy rule requiring due-date-based bucket structure and Finance Controls Lead approval for configuration changes; added C-10 aging method configuration governance control; updated C-02, C-03, and C-08 evidence columns to name specific Oracle predefined reports (Import AutoInvoice Execution Report, Invoices Posted to Suspense Report, Print Adjustments Report, Receivables to GL Reconciliation Report, Potential Reconciling Items Report) | AR Process Owner |

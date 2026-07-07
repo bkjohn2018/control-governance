@@ -81,7 +81,7 @@ Any of the following requires AI use-case intake before first use:
 - Using an AI tool to generate, adjust, or summarize any plan version or forecast.
 - Using an AI tool that processes EPM Planning data outside the Oracle tenant.
 - Enabling a new Oracle EPM AI feature not previously assessed.
-- Piloting an agentic workflow that interacts with EPM Planning forms, workflows, or data-push jobs.
+- Activating an agentic workflow that interacts with EPM Planning forms, workflows, or data-push jobs.
 
 ### 5.2 Intake routing
 
@@ -174,7 +174,7 @@ AI agents that can initiate multi-step actions in EPM Planning (e.g., load data,
 | Approved AI tool list for EPM Planning users | IT Security + FP&A Director | Any restricted use |
 | Oracle predictive planning features active in tenant | EPM Service Administrator | AI feature assessment |
 | Whether external AI tools retain EPM data or use it for training | IT Security + Controllership | Any high-risk use |
-| Agent readiness scope, if any agentic pilot is pursued | FP&A Director | Agent pilot |
+| Agent readiness scope, if any agentic use is activated | FP&A Director | Agent deployment |
 
 ---
 

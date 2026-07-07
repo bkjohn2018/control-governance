@@ -89,7 +89,7 @@ Every fixed-assets AI use case must record:
 - retained evidence,
 - risk tier and decision.
 
-Decision outcomes: low-risk allowed, restricted use approved, high-risk review required, agent pilot approved, or rejected.
+Decision outcomes: low-risk allowed, restricted use approved, high-risk review required, agent use approved (bounded scope), or rejected.
 
 ---
 

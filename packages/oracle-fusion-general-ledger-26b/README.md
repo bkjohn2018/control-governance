@@ -19,7 +19,7 @@ Governance package for Oracle Fusion Cloud General Ledger release **26B**, scope
 
 1. Endorse controlled operations for journal-to-close.
 2. Confirm approved GL reports, metrics, and drill paths.
-3. Approve AI posture before any AI-supported GL analysis or agentic pilot.
+3. Approve AI posture before any AI-supported GL analysis or agentic use.
 
 ## Oracle reference
 

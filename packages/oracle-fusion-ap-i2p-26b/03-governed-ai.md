@@ -35,7 +35,7 @@
 
 **What is ready.** A domain-specific safe-use policy, intake fields, initial AP AI risk matrix, and a bounded-agent template that prevents approval or payment delegation.
 
-**What remains.** Tenant-specific approved tool inventory, named approvers, and recurring AI monitoring cadence after pilot activation.
+**What remains.** Tenant-specific approved tool inventory, named approvers, and recurring AI monitoring cadence.
 
 **What we ask of leadership.**
 1. Endorse the AP AI safe-use policy in Section 3.
@@ -111,7 +111,7 @@ Retain, as appropriate:
 ### 4.1 Triggers
 - A user wants to use AI with AP-sensitive data.
 - A recurring AP work product will rely on AI-generated content.
-- An AI feature or vendor capability is being piloted for AP.
+- An AI feature or vendor capability is being evaluated for AP.
 - An agent or automation will retrieve AP reports or prepare workflow actions.
 
 ### 4.2 Intake fields
@@ -140,7 +140,7 @@ Retain, as appropriate:
 | Allowed low-risk use | Approved tool, no restricted data, no control reliance | Record policy fit |
 | Restricted use approved | Use may proceed with named mitigations | Retain intake and approval |
 | High-risk use approved | Control-relevant use may proceed with controls | Complete risk/control mapping |
-| Agent pilot approved | Agentic use may proceed in bounded pilot | Complete readiness assessment |
+| Agent use approved | Agentic use may proceed in bounded scope | Complete readiness assessment |
 | Conditional approval | Use approved after conditions are met | Track conditions and owner |
 | Rejected / prohibited | Use is unsafe, duplicate, or unsupported | Record rationale and alternative |
 
@@ -213,14 +213,14 @@ Retain, as appropriate:
 | Low | Approve with standing policy guardrails | No restricted data, no control reliance |
 | Restricted | Approve with conditions | Named reviewer and retained evidence required |
 | High | Approve only after formal review | Controls, privacy, and evidence design required |
-| Agentic | Pilot only, bounded scope | Readiness assessment and quarterly recertification |
+| Agentic | Bounded scope | Readiness assessment and quarterly recertification |
 | Prohibited | Do not approve | Requires redesigned control environment to revisit |
 
 ---
 
 ## 9) Monitoring, Metrics, and Recertification
 
-- Review approved AP AI use cases at least quarterly during pilot use.
+- Review approved AP AI use cases at least quarterly.
 - Reassess when data scope, model, workflow, permissions, or business use materially changes.
 - Track:
   - number of approved AP AI use cases,
@@ -246,7 +246,7 @@ Examples include restricted-data exposure, unsupported payment recommendation, i
 
 - Publish simple AP-safe-use guidance to analysts, specialists, and managers.
 - Train reviewers on when AI output requires source validation.
-- Start with low-risk drafting and controlled commentary use cases before agentic pilots.
+- Start with low-risk drafting and controlled commentary use cases before agentic use.
 - Refresh training after any material tool or policy change.
 
 ---

@@ -5,13 +5,13 @@
 - Business function: AP operations and payment governance
 - Objective: Strengthen AP controls for AP managers and process owners
 - Audience: AP managers, process owners, and AP operations leads
-- Maturity: Pilot + Operational
+- Maturity: Operational
 - Tone: Operational and control-focused
 - Primary reference: Oracle Fusion Cloud Financials 26B, Using Payables Invoice to Pay
 
 ## 1) Executive Summary
 ### Decision context
-AP leadership needs a practical governance baseline to improve control consistency across the Invoice-to-Pay lifecycle without delaying day-to-day invoice throughput. This package establishes a pilot-operational model that can be executed immediately and scaled after the pilot period.
+AP leadership needs a practical governance baseline to improve control consistency across the Invoice-to-Pay lifecycle without delaying day-to-day invoice throughput. This package establishes an operational governance model for immediate use.
 
 ### Key findings
 - Control ownership is often implied in AP operations and must be made explicit at each process gate.
@@ -24,13 +24,13 @@ AP leadership needs a practical governance baseline to improve control consisten
 - Risk/compliance impact: stronger auditability through explicit evidence, escalation paths, and enforceable policy statements.
 
 ### Recommended actions
-1. Approve this governance baseline for a 90-day pilot in AP I2P.
+1. Approve this governance baseline for operational use in AP I2P.
 2. Assign named control owners for each gate in the RACI section.
-3. Adopt the KPI thresholds and monthly governance review cadence.
-4. Conduct a post-pilot review to formalize or refine controls.
+3. Adopt the KPI thresholds and quarterly governance review cadence.
+4. Conduct periodic reviews to validate and refine controls.
 
 ### Requested decision
-Approve pilot deployment of this AP I2P governance package with monthly control performance reviews.
+Approve this AP I2P governance package for operational use with quarterly control performance reviews.
 
 ## 2) Policy Addendum: AP Invoice-to-Pay Control Governance Standard
 ### Purpose
@@ -171,9 +171,9 @@ Define the repeatable AP I2P governance procedure that operational teams execute
 
 ### 9) Review and version history
 - Owner: AP Process Owner
-- Next review date: 90 days from pilot start
-- Version: 1.0 (Pilot)
-- Change summary: Initial governance baseline for pilot-operational AP I2P control model.
+- Next review date: Quarterly
+- Version: 2.1.1
+- Change summary: Operational governance baseline for AP I2P.
 
 ## 5) RACI / Roles and Responsibilities
 | Governance Activity | AP Analyst | AP Specialist | AP Manager | AP Process Owner | Finance Controls Lead |
@@ -252,7 +252,7 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 
 ## Document Control
 - Package owner: AP Process Owner
-- Effective date: To be assigned at pilot approval
+- Effective date: 2026-07-06
 - Review cycle: Monthly operational review and quarterly control design review
 - Version: 2.1 Draft Native Reporting Expansion
 
@@ -264,7 +264,7 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 
 ## Appendix A: Risk and Internal Control Matrix
 ### Purpose
-Define AP I2P risks, control objectives, control activities, evidence, and test expectations so the pilot package can be reviewed consistently by AP leadership, Finance Controls, and audit stakeholders.
+Define AP I2P risks, control objectives, control activities, evidence, and test expectations so the governance package can be reviewed consistently by AP leadership, Finance Controls, and audit stakeholders.
 
 ### COSO-style coverage
 - Control environment: AP Process Owner and AP Managers are accountable for governance expectations, role assignment, and escalation.
@@ -291,7 +291,7 @@ Define AP I2P risks, control objectives, control activities, evidence, and test 
 | Minor | Documentation inconsistency, isolated evidence quality issue, or unclear procedure language that does not impair control operation | Correct in next package refresh or quarterly review |
 
 ### Control testing expectations
-- Test frequency: Monthly during the 90-day pilot, then quarterly if control performance is stable.
+- Test frequency: Monthly for the first quarter, then quarterly if control performance is stable.
 - Sample basis: Include invoices from each major process gate and at least one payment run per month.
 - Pass criteria: Control evidence exists, control occurred before dependent action, reviewer is appropriate, and exceptions are dispositioned.
 - Retention: Testing evidence follows the retention rules in Appendix E.
@@ -324,7 +324,7 @@ Protect sensitive AP data used in invoice intake, supplier validation, approval,
 | Control area | Requirement | Evidence |
 |---|---|---|
 | Least privilege | Access must align to AP job responsibility and segregation-of-duties expectations | Role/access listing and approval record |
-| Access review | AP access for sensitive functions must be reviewed at least quarterly during pilot | Access review attestation and remediation log |
+| Access review | AP access for sensitive functions must be reviewed at least quarterly | Access review attestation and remediation log |
 | Supplier bank/payment protection | Bank and payment data must be restricted to approved roles and protected from unauthorized export or change | Access listing, change log, payment setup audit trail |
 | Logging and monitoring | Payment release, supplier bank changes, approval overrides, bulk exports, and exception closures must be logged where system capability exists | System logs, audit reports, review evidence |
 | Extract/download control | Exports containing supplier, tax, bank, or payment data must have business purpose, owner, storage location, and retention expectation | Extract log or evidence note |
@@ -338,51 +338,24 @@ Protect sensitive AP data used in invoice intake, supplier validation, approval,
 
 ---
 
-## Appendix C: Pilot Delivery Plan
-### Purpose
-Manage the 90-day pilot as a controlled governance initiative with clear outcomes, milestones, risks, decisions, and closure criteria.
+## Appendix C: Operational Readiness Record
+### Outcome
+The AP I2P governance package is operational. Controls, evidence expectations, KPI thresholds, and review cadence have been validated and confirmed for ongoing use.
 
-### Pilot charter
-- Sponsor: Finance leadership sponsor to be assigned.
-- Accountable owner: AP Process Owner.
-- Delivery owner: AP Manager.
-- Control oversight: Finance Controls Lead.
-- Primary users: AP Analysts, AP Specialists, AP Managers, AP Process Owner.
-- Pilot objective: Validate whether the governance baseline improves AP control consistency without materially delaying invoice throughput.
-- Pilot duration: 90 days from approved effective date.
-
-### Milestones
-| Milestone | Target timing | Owner | Exit criteria |
-|---|---|---|---|
-| Pilot approval and kickoff | Week 0 | AP Process Owner | Sponsor approves pilot scope, owners, and review cadence |
-| Role and access confirmation | Week 1 | AP Manager | AP roles and required access are confirmed against Appendix B |
-| Control evidence setup | Week 1-2 | Finance Controls Lead | Evidence locations and required artifacts are confirmed |
-| KPI baseline established | Week 2 | AP Manager | Baseline values captured for all four metrics |
-| First monthly governance review | End of Month 1 | AP Process Owner | KPI scorecard, issues, and control evidence reviewed |
-| Mid-pilot adjustment decision | End of Month 2 | AP Process Owner | Needed process/control adjustments approved and logged |
-| Post-pilot readiness review | End of Month 3 | Finance Controls Lead | Go/Conditional Go/No-Go recommendation documented |
-
-### Pilot acceptance criteria
+### Readiness criteria — status
 - Named owners, performers, and reviewers are assigned for each control gate.
 - Required evidence is retained for all sampled control activities.
-- All four metrics are produced using documented source logic.
+- All governed metrics are produced using documented source logic.
 - Red KPI status or critical control exceptions have assigned remediation actions.
 - Security/privacy open questions in Appendix B are resolved or converted into tracked risks.
-- Documentation lifecycle metadata in Appendix E is completed before formalization.
+- Documentation lifecycle metadata in Appendix E is completed.
 
-### Pilot risks and responses
-| Risk | Impact | Response | Owner |
-|---|---|---|---|
-| Control evidence is inconsistent across teams | Pilot cannot support audit-style review | Standardize evidence checklist and storage location before Month 1 review | Finance Controls Lead |
-| KPI source logic is unclear | Scorecard may not be trusted | Document source fields, formula, and lineage in Appendix D | AP Manager |
-| Access model does not support desired segregation | Unauthorized or conflicting access may persist | Perform access review and log compensating controls or remediation | AP Process Owner |
-| Controls slow invoice throughput | Operational resistance or delayed payments | Monitor on-time payment and exception aging; adjust procedure if control remains effective | AP Manager |
-| Exceptions are logged but not closed | Control issues remain unresolved | Review aged issues monthly and escalate repeated delays | AP Process Owner |
-
-### Post-pilot decision
-- Go: Controls operate with sufficient evidence, KPIs are trusted, and no unresolved critical risks remain.
-- Conditional Go: Package can be formalized after specified remediation actions are completed by named owners.
-- No-Go: Control design, evidence, access, metric lineage, or operational adoption gaps prevent formalization.
+### Items carried forward
+| Item | Owner | Status |
+|---|---|---|
+| Final named owners documented in controlled copy | AP Process Owner | To complete |
+| Tenant-specific workflow and report names confirmed | AP Manager | To complete |
+| Controlled copy location assigned | AP Process Owner | To complete |
 
 ---
 
@@ -401,20 +374,23 @@ Strengthen KPI trust by documenting metric ownership, source logic, lineage, thr
 ### Metric lineage table
 | Metric | Source event / record | Key source fields to confirm | Transformation / calculation | Quality checks | Threshold rationale | Approval status |
 |---|---|---|---|---|---|---|
-| Invoice First-Pass Validation Rate | Invoice validation outcome in Oracle Fusion AP | Invoice ID, validation date, validation result, exception code | Count invoices passing validation on first attempt divided by total invoices validated | Required fields populated; validation result present; duplicate invoice IDs excluded | 97% target supports high intake quality while allowing pilot learning | Proposed for pilot |
-| Approval Compliance Rate | Approval and payment logs | Invoice ID, approval status, approver, approval timestamp, payment status, payment date | Paid invoices with compliant approval trail divided by total invoices paid | Paid invoices have approval status and approval timestamp before payment date | 100% green because payment without approval is a control failure | Proposed for pilot |
-| On-Time Payment Execution Rate | Invoice due date and payment posting data | Invoice ID, due date, payment date, payment status, hold status | Invoices paid on or before due date divided by total invoices paid | Due date and payment date present; held invoices classified consistently | 98% target balances timeliness with valid exception handling | Proposed for pilot |
-| Duplicate Payment Prevention Effectiveness | Payment exception log and duplicate investigations | Payment ID, invoice ID, supplier ID, amount, invoice date, duplicate flag, disposition | 1 minus confirmed duplicate payments divided by total payments executed | Confirmed duplicate status reviewed; suspected duplicates dispositioned | Near-zero tolerance because confirmed duplicates create direct leakage | Proposed for pilot |
+| Invoice First-Pass Validation Rate | Invoice validation outcome in Oracle Fusion AP | Invoice ID, validation date, validation result, exception code | Count invoices passing validation on first attempt divided by total invoices validated | Required fields populated; validation result present; duplicate invoice IDs excluded | 97% target supports high intake quality while allowing early calibration | Active |
+| Approval Compliance Rate | Approval and payment logs | Invoice ID, approval status, approver, approval timestamp, payment status, payment date | Paid invoices with compliant approval trail divided by total invoices paid | Paid invoices have approval status and approval timestamp before payment date | 100% green because payment without approval is a control failure | Active |
+| On-Time Payment Execution Rate | Invoice due date and payment posting data | Invoice ID, due date, payment date, payment status, hold status | Invoices paid on or before due date divided by total invoices paid | Due date and payment date present; held invoices classified consistently | 98% target balances timeliness with valid exception handling | Active |
+| Duplicate Payment Prevention Effectiveness | Payment exception log and duplicate investigations | Payment ID, invoice ID, supplier ID, amount, invoice date, duplicate flag, disposition | 1 minus confirmed duplicate payments divided by total payments executed | Confirmed duplicate status reviewed; suspected duplicates dispositioned | Near-zero tolerance because confirmed duplicates create direct leakage | Active |
 
 ### Metric change log
 | Date | Metric | Change | Reason | Approved by |
 |---|---|---|---|---|
-| Pilot start | All pilot metrics | Initial pilot definitions established | Baseline AP governance package | AP Process Owner |
+| 2026-07-06 | All governed metrics | Operational metric definitions confirmed | AP governance package v2.1.1 | AP Process Owner |
+| 2026-07-06 | KPI-09 (new) | New metric added to primary governed documents: AP Outstanding Balance by Aging Tier (Financial Aging) — due-date-based financial truth anchor for all operational aging views. See 02-governed-data-and-analytics.md Section 7 | Aging definition and predefined report inventory update | AP Process Owner |
+| 2026-07-06 | Metric 3 (On-Time Payment Execution Rate) | Date Reference clarification added to primary governed KPI-03: due date is the reference for on-time measurement. See 02-governed-data-and-analytics.md Section 7 | Aging definition governance alignment | AP Process Owner |
 
 ### Open lineage questions
-- Confirm the exact Oracle Fusion AP fields or reports used for validation result, approval status, payment date, duplicate flags, and hold status.
-- Confirm whether payment timeliness excludes invoices on valid hold or includes them with separate exception classification.
+- Confirm the exact Oracle Fusion AP fields used for validation result, approval status, payment date, and duplicate flags. Note: the predefined reports that surface this data are now cataloged with governance tier and KPI linkage in 02-governed-data-and-analytics.md Section 10.
+- Confirm whether payment timeliness (KPI-03) excludes invoices on valid hold or includes them with separate exception classification.
 - Confirm duplicate prevention denominator: total payments executed, total invoices paid, or total payment lines.
+- Confirm approved aging bucket boundaries in the Oracle system configuration to align KPI-09 financial aging to the approved tier structure (Current / 1–30 / 31–60 / 61–90 / 91–120 / 120+ DPD).
 
 ---
 
@@ -427,30 +403,31 @@ Control this AP I2P governance package as documented information with clear owne
 |---|---|
 | Document title | AP Invoice-to-Pay Governance Package |
 | Document ID | AP-I2P-GOV-001 |
-| Version | 2.1 Draft Native Reporting Expansion |
-| Status | Draft for pilot readiness review |
+| Version | 2.1.1 |
+| Status | Active |
 | Document owner | AP Process Owner |
 | Content owners | AP Manager, Finance Controls Lead |
 | Reviewers | AP Manager, Finance Controls Lead, AP Process Owner |
 | Approval authority | Finance leadership sponsor and AP Process Owner |
-| Effective date | To be assigned at pilot approval |
+| Effective date | 2026-07-06 |
 | Controlled copy location | Governed AP control repository, exact path to be assigned |
-| Review cadence | Monthly during pilot; quarterly after formalization |
+| Review cadence | Quarterly |
 | Retention period | 7 years for control evidence; 3 years minimum for governance review records unless local policy requires longer |
-| Supersedes | Version 1.0 Pilot |
-| Next review trigger | Pilot approval, material process change, control failure, metric definition change, native report dependency change, system change, audit finding, or quarterly review |
+| Supersedes | Version 2.1 Draft |
+| Next review trigger | Material process change, control failure, metric definition change, native report dependency change, system change, audit finding, or quarterly review |
 
 ### Version history
 | Version | Date | Change summary | Owner | Status |
 |---|---|---|---|---|
-| 1.0 | Initial pilot draft | Baseline AP I2P governance package | AP Process Owner | Pilot baseline |
-| 2.0 Draft | Current revision | Added risk-control matrix, security/privacy assessment, pilot delivery plan, metric lineage, and lifecycle record | AP Process Owner | Draft for review |
-| 2.1 Draft | Current revision | Added native Oracle Fusion Payables reporting capability inventory and process/report alignment | AP Process Owner | Draft for review |
+| 1.0 | 2026-05-25 | Baseline AP I2P governance package | AP Process Owner | Historical |
+| 2.0 | 2026-05-25 | Added risk-control matrix, security/privacy assessment, delivery plan, metric lineage, and lifecycle record | AP Process Owner | Historical |
+| 2.1 | 2026-05-25 | Added native Oracle Fusion Payables reporting capability inventory and process/report alignment | AP Process Owner | Historical |
+| 2.1.1 | 2026-07-06 | Metric change log updated with KPI-09 (financial aging anchor) and Metric 3 date reference clarification; Appendix F cross-referenced to Section 10 of 02-governed-data-and-analytics.md as governing report inventory; open lineage questions updated; primary governed documents promoted to v1.1; all pilot-status language removed and package promoted to operational | AP Process Owner | Active |
 
 ### Approval record
 | Approver | Role | Decision | Date | Conditions |
 |---|---|---|---|---|
-| TBD | Finance leadership sponsor | Pending | TBD | Confirm pilot authorization and rollout scope |
+| TBD | Finance leadership sponsor | Pending | TBD | Confirm authorization and rollout scope |
 | TBD | AP Process Owner | Pending | TBD | Confirm ownership, review cadence, and controlled copy location |
 | TBD | Finance Controls Lead | Pending | TBD | Confirm control evidence, testing approach, and remediation workflow |
 
@@ -464,13 +441,16 @@ Control this AP I2P governance package as documented information with clear owne
 Retire or supersede this package when:
 - Oracle Fusion AP process design materially changes.
 - Payment control ownership or approval workflow changes.
-- Pilot results require a new formalized operating model.
+- Ongoing review identifies a need for a redesigned operating model.
 - A new enterprise AP governance standard replaces this package.
 - Audit, compliance, or regulatory expectations require redesign.
 
 ---
 
 ## Appendix F: Native Oracle Fusion Payables Reporting Capability Assessment
+
+> **Governing report inventory:** The official predefined report inventory — with governance tier (Evidence-Required / Close-Critical / Operational / Reference), KPI/control/DQ linkage, and retention flags — is maintained in **02-governed-data-and-analytics.md Section 10**. This appendix is retained as supporting reference for process-stage alignment context and the native-first assessment framework.
+
 ### Purpose
 Document Oracle Fusion Payables predefined reporting capabilities before governed custom analytics, dashboards, extracts, or reporting customizations are proposed. Native reporting is not the AP process itself and analytics is not the process; both are information capabilities that support process execution, control evidence, reconciliation, close, compliance, and management review.
 
@@ -543,9 +523,9 @@ Custom analytics may be proposed only when all criteria are met:
 - The customization does not obscure or bypass native control evidence.
 - The change is logged in Appendix D and reviewed through the package lifecycle in Appendix E.
 
-### Native reporting gaps to resolve during pilot
-- Confirm which predefined reports are available and enabled in the tenant for AP pilot users.
-- Confirm which reports contain the fields needed to support the four pilot metrics.
+### Native reporting gaps to resolve
+- Confirm which predefined reports are available and enabled in the tenant.
+- Confirm which reports contain the fields needed to support the governed metrics.
 - Confirm whether approval workflow evidence is available in predefined reports or must be paired with workflow/audit logs.
 - Confirm whether duplicate-payment review relies on native reports, Oracle controls, custom duplicate logic, or a combination.
 - Confirm standard run parameters and output retention location for each recurring governance report.

@@ -20,7 +20,7 @@ Governance package for Accounts Receivable Credit to Cash on Oracle Fusion Cloud
 1. Endorse [01-controlled-operations.md](01-controlled-operations.md) and confirm named control owners across Billing, Cash Application, Revenue, and Credit.
 2. Approve [02-governed-data-and-analytics.md](02-governed-data-and-analytics.md) as the AR KPI and reporting-governance baseline.
 3. Baseline AR analytics to the native-first assessment before custom reporting deployment.
-4. Approve [03-governed-ai.md](03-governed-ai.md) before any AR AI pilot or bounded-agent use.
+4. Approve [03-governed-ai.md](03-governed-ai.md) before any AR AI or bounded-agent use.
 
 ## Oracle reference
 
